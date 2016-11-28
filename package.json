@@ -1,0 +1,31 @@
+{
+  "name": "fork3",
+  "version": "0.0.1",
+  "description": "Simplified child process management.",
+  "keywords": [
+    "child",
+    "process",
+    "fork",
+    "child_process"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unkelpehr/fork3"
+  },
+  "author": "Pehr Boman <https://github.com/unkelpehr>",
+
+  "scripts": {
+    "test": "mocha test/**/index.js"
+  },
+
+  "dependencies": {
+    "errio": "^1.2.1",
+    "YAEventEmitter": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+
+  "license": "MIT"
+}
