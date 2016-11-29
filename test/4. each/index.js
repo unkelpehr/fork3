@@ -20,6 +20,7 @@ describe('fork3 return value', function () {
 
 		fork3.fork('./child.js');
 
+		
 		fork3.each(function (child) {
 			expect(child.basename).to.equal('child.js');
 			done();

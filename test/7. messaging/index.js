@@ -128,4 +128,21 @@ describe('messaging', function () {
 		});
 	});
 	*/
+
+	// TODO: Tests for making sure that we can listen to requests from the child process
+	/*
+	it('sending messages to a child which exists without answering executes the callback with an error', function (done) {
+		var fork3 = _fork3(),
+			child = fork3.fork('./child-empty.js');
+
+		child.on('status-change', function (oldStatus, newStatus) {
+			console.log(oldStatus, newStatus);
+		});
+
+		child.send('lolwhut', function (err, res) {
+			expect(err).to.be.an.error;
+			done();
+		});
+	});
+	*/
 });
