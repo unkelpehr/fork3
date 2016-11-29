@@ -2,8 +2,13 @@
 
 var expect = require('chai').expect;
 
-function _fork2 () {
-	Object.keys(require.cache).forEach((path) => path.indexOf('fork2') > -1 && delete require.cache[path]);
+var _fork3 = function () {
+	Object.keys(require.cache).forEach(function (path) {
+		if (~path.indexOf('fork3')) {
+			delete require.cache[path];
+		}
+	});
+
 	return require('../../index.js');
 }
 
@@ -11,9 +16,9 @@ describe('events', function () {
 
 	it('(WORKING CHILD) "child-status-change" goes from nothing -> created -> starting -> started', function (done) {
 		var count = 0,
-			fork2 = _fork2();
+			fork3 = _fork3();
 
-		fork2.on('child-status-change', function (child, oldStatus, newStatus, error) {
+		fork3.on('child-status-change', function (child, oldStatus, newStatus, error) {
 			count++;
 
 			switch (count) {
@@ -36,12 +41,12 @@ describe('events', function () {
 			}
 		});
 
-		fork2.fork('./child.js');
+		fork3.fork('./child.js');
 	});
 
 	it('(WORKING CHILD) child-status-nothing -> child-status-created -> child-status-starting -> child-status-started', function (done) {
 		var count = 0,
-			fork2 = _fork2();
+			fork3 = _fork3();
 
 		function callback (child, oldStatus, newStatus, error) {
 			count++;
@@ -66,21 +71,21 @@ describe('events', function () {
 			}
 		}
 
-		fork2.on('child-status-nothing', callback);
-		fork2.on('child-status-created', callback);
-		fork2.on('child-status-starting', callback);
-		fork2.on('child-status-started', callback);
-		fork2.on('child-status-errored', callback);
+		fork3.on('child-status-nothing', callback);
+		fork3.on('child-status-created', callback);
+		fork3.on('child-status-starting', callback);
+		fork3.on('child-status-started', callback);
+		fork3.on('child-status-errored', callback);
 
-		fork2.fork('./child.js');
+		fork3.fork('./child.js');
 	});
 
 
 	it('(BROKEN CHILD) "child-status-change" goes from nothing -> created -> starting -> errored', function (done) {
 		var count = 0,
-			fork2 = _fork2();
+			fork3 = _fork3();
 
-		fork2.on('child-status-change', function (child, oldStatus, newStatus, error) {
+		fork3.on('child-status-change', function (child, oldStatus, newStatus, error) {
 			count++;
 
 			switch (count) {
@@ -103,12 +108,12 @@ describe('events', function () {
 			}
 		});
 
-		fork2.fork('./child-broken.js');
+		fork3.fork('./child-broken.js');
 	});
 
 	it('(BROKEN CHILD) child-status-nothing -> child-status-created -> child-status-starting -> child-status-errored', function (done) {
 		var count = 0,
-			fork2 = _fork2();
+			fork3 = _fork3();
 
 		function callback (child, oldStatus, newStatus, error) {
 			count++;
@@ -133,19 +138,19 @@ describe('events', function () {
 			}
 		}
 
-		fork2.on('child-status-nothing', callback);
-		fork2.on('child-status-created', callback);
-		fork2.on('child-status-starting', callback);
-		fork2.on('child-status-started', callback);
-		fork2.on('child-status-errored', callback);
+		fork3.on('child-status-nothing', callback);
+		fork3.on('child-status-created', callback);
+		fork3.on('child-status-starting', callback);
+		fork3.on('child-status-started', callback);
+		fork3.on('child-status-errored', callback);
 
-		fork2.fork('./child-broken.js');
+		fork3.fork('./child-broken.js');
 	});
 
 
 	it('"child-error"', function (done) {
 		var count = 0,
-			fork2 = _fork2();
+			fork3 = _fork3();
 
 		function callback (child, error) {
 			expect(error).to.be.an.error;
@@ -155,9 +160,9 @@ describe('events', function () {
 			}
 		}
 
-		fork2.on('child-error', callback);
+		fork3.on('child-error', callback);
 
-		fork2.fork('./child-broken.js');
-		fork2.fork('./child-missing.js');
+		fork3.fork('./child-broken.js');
+		fork3.fork('./child-missing.js');
 	});
 });
