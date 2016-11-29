@@ -1,25 +1,36 @@
 'use strict';
 
-var expect = require('chai').expect,
-	fork2 = require('../../index.js');
+var expect = require('chai').expect;
 
-describe('fork2 return value', function () {
-	it('fork2 is an object', () => expect(fork2).to.be.an.object);
+var _fork3 = function () {
+	Object.keys(require.cache).forEach(function (path) {
+		if (~path.indexOf('fork3')) {
+			delete require.cache[path];
+		}
+	});
 
-	it('fork2.isParentInterface equals true', () => expect(fork2.isParentInterface).to.equal(true));
-	it('fork2.isChildInterface equals false', () => expect(fork2.isChildInterface).to.equal(false));
+	return require('../../index.js');
+}
 
-	it('fork2.collection is an object', () => expect(fork2.collection).to.be.an.object);
-	it('fork2.workingDir should equal this __dirname', () => expect(fork2.workingDir).to.equal(__dirname));
+describe('fork3 return value', function () {
+	var fork3 = _fork3();
 
-	it('fork2.each is a function', () => expect(fork2.each).to.be.a.function);
-	it('fork2.fork is a function', () => expect(fork2.fork).to.be.a.function);
-	it('fork2.resolve is a function', () => expect(fork2.resolve).to.be.a.function);
-	it('fork2.childInterface is a function', () => expect(fork2.childInterface).to.be.a.function);
+	it('fork3 is an object', () => expect(fork3).to.be.an.object);
 
-	it('fork2.on is a function', () => expect(fork2.on).to.be.a.function);
-	it('fork2.off is a function', () => expect(fork2.off).to.be.a.function);
-	it('fork2.once is a function', () => expect(fork2.once).to.be.a.function);
-	it('fork2.emit is a function', () => expect(fork2.emit).to.be.a.function);
-	it('fork2.hasListeners is a function', () => expect(fork2.hasListeners).to.be.a.function);
+	it('fork3.isParentInterface equals true', () => expect(fork3.isParentInterface).to.equal(true));
+	it('fork3.isChildInterface equals false', () => expect(fork3.isChildInterface).to.equal(false));
+
+	it('fork3.collection is an object', () => expect(fork3.collection).to.be.an.object);
+	it('fork3.workingDir should equal this __dirname', () => expect(fork3.workingDir).to.equal(__dirname));
+
+	it('fork3.each is a function', () => expect(fork3.each).to.be.a.function);
+	it('fork3.fork is a function', () => expect(fork3.fork).to.be.a.function);
+	it('fork3.resolve is a function', () => expect(fork3.resolve).to.be.a.function);
+	it('fork3.childInterface is a function', () => expect(fork3.childInterface).to.be.a.function);
+
+	it('fork3.on is a function', () => expect(fork3.on).to.be.a.function);
+	it('fork3.off is a function', () => expect(fork3.off).to.be.a.function);
+	it('fork3.once is a function', () => expect(fork3.once).to.be.a.function);
+	it('fork3.emit is a function', () => expect(fork3.emit).to.be.a.function);
+	it('fork3.hasListeners is a function', () => expect(fork3.hasListeners).to.be.a.function);
 });
