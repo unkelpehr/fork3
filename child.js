@@ -1,7 +1,6 @@
 var fork3 = require('./index').childInterface();
 
-fork3.on('shutdown', function (respond) {
-	console.log('they wanna shut me down....');
-
-	setTimeout(() => respond(), 1000);
+fork3.on('hello', function (respond) {
+	respond();
+	respond(); // hehehehehehe
 });

@@ -103,6 +103,9 @@ describe('messaging', function () {
 		}
 
 		child.send('respondMultiple', function (err) {
+			if (err) {
+				throw err;
+			}
 			expect(err).to.be.null;
 			next();
 		}).on('error', function (err) {

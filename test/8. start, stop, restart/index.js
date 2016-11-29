@@ -14,7 +14,7 @@ var _fork3 = function () {
 
 describe('8. start, stop, restart', function () {
 	var fork3 = _fork3();
-	/*
+	
 	it('can gracefully stop a process', function (done) {
 		fork3.fork('./child.js', function (err) {
 			var child = this;
@@ -44,13 +44,11 @@ describe('8. start, stop, restart', function () {
 			});
 		});
 	});
-	*/
+	
 	it('can gracefully restart a process', function (done) {
 			this.timeout(5000);
 
-		_fork3().on('child-status-change', function (child, oldStatus, newStatus) {
-			console.log('%s went from %s -> %s', child.modulePath, oldStatus, newStatus);
-		}).fork('./child.js', function (err) {
+		_fork3().fork('./child.js', function (err) {
 			var child = this;
 
 			expect(err).to.be.null;
