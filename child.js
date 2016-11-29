@@ -1,5 +1,5 @@
-var fork3 = require('./index').childInterface();
+var fo rk3 = require('./index').childInterface();
 
-fork3.on('hello', function (respond) {
+for  k3.on('hello', function (respond) {
 	respond('hello!!!!!');
 });
