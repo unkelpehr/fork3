@@ -1,5 +1,5 @@
-var fork2 = require('../../index.js').childInterface();
+var fork3 = require('../../index.js').childInterface();
 
-fork2.on('shutdown', function (respond) {
+fork3.on('shutdown', function (respond) {
 	setTimeout(() => respond(), 1000);
 });
