@@ -1,6 +1,6 @@
 {
   "name": "fork3",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Simplified child process management.",
   "keywords": [
     "child",
@@ -20,7 +20,7 @@
 
   "dependencies": {
     "errio": "^1.2.1",
-    "YAEventEmitter": "^0.0.3"
+    "YAEventEmitter": "^0.0.4"
   },
   "devDependencies": {
     "mocha": "*",
