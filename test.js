@@ -8,6 +8,8 @@ fork3.on('child-status-change', function (child, oldStatus, newStatus) {
 	console.log('%s is restarted', child.basename);
 });
 
-fork3.fork('./child').restart().send('hello', function (err) {
-	console.log('response! error:\n', err);
+fork3.fork('./child').restart().restart().restart(function (err) {
+	console.log('restarted!');
+}).send('hello', function (err) {
+	console.log('response!');
 });
